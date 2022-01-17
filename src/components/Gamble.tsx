@@ -5,9 +5,10 @@ import { ask, guess } from "../utils/ajax";
 type GambleProps = {
   code: string;
   guesses: string;
+  questions: number;
 }
 
-export const Gamble: React.FC<GambleProps> = ({ code, guesses }) => {
+export const Gamble: React.FC<GambleProps> = ({ code, guesses, questions }) => {
   const [thought, setThought] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -23,7 +24,7 @@ export const Gamble: React.FC<GambleProps> = ({ code, guesses }) => {
     <div>
       <QuestionInput value={thought} maxLength={128} onChange={({ target }) => setThought(target.value)}/>
       <GambleButtonsWrapper>
-        <BlueButton onClick={handleClick(ask)} disabled={loading}>Ask</BlueButton>
+        <BlueButton onClick={handleClick(ask)} disabled={questions <= 0 || loading}>Ask ({questions})</BlueButton>
         <GreenButton onClick={handleClick(guess)} disabled={loading}>Guess ({guesses})</GreenButton>
       </GambleButtonsWrapper>
     </div>

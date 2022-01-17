@@ -31,7 +31,8 @@ export const GamePage = () => {
     if(!error){
       setCurrentPlayer(getPlayer());
       socket = socialize(code, (data) => {
-        setGame(data)
+        setGame(data);
+        document.getElementById('scrollTo')?.scrollIntoView();
       },
       () => setError(true));
     }
@@ -65,9 +66,10 @@ export const GamePage = () => {
       <GameContainer>
         {iWordmaster && !game.word && <WordSelection code={code ?? ''} />}
         <GameHistory questions={game.questions} />
+        <div id='scrollTo' style={{ margin: '1rem' }}></div>
       </GameContainer>
       {iAnswer && <ToBeOrNotToBe code={code ?? ''} question={game.question} questionPlayer={game.questionPlayer}/>}
-      {iGuess && !game.isGuessed && <Gamble key={guessesLeft} code={code ?? ''} guesses={game.players[currentPlayer].guesses}/>}
+      {iGuess && !game.isGuessed && <Gamble key={guessesLeft} code={code ?? ''} guesses={game.players[currentPlayer].guesses} questions={game.players[currentPlayer].questions}/>}
     </GameWrapper>
   )
 }

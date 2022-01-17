@@ -210,10 +210,15 @@ export const GameContainer = styled.div`
   overflow: auto;
 `
 
-export const HistoryLine = styled.h4<{ correct: boolean }>`
+export const HistoryLine = styled.h4<{ correct: boolean, guess?: boolean }>`
   margin: 1rem auto;
-  color: ${({ correct }) => correct ? color.mint : color.red};
+  color: ${({ correct, guess }) => correct ? color.mint : guess ? color.white : color.red};
   max-width: 90vw;
   overflow: auto;
   text-align: center
+`
+
+export const Word = styled.span`
+  margin: 0;
+  letter-spacing: 5px;
 `

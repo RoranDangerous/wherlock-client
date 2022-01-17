@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { InformationContainer } from "../styles";
+import { InformationContainer, Word } from "../styles";
 import { getPlayer } from "../utils/auth"
 
 type InformationProps = {
@@ -15,7 +15,7 @@ export const Information: React.FC<InformationProps> = ({ game }) => {
   return (
     <InformationContainer>
       <h1>Waiting for {game.word && !game.question ? guesser : wordmaster}</h1>
-      {game.category && <p>{game.category}:&nbsp;{isWordmaster || game.isGuessed ? game.word : '?'}</p>}
+      {game.category && <p>{game.category}:&nbsp;<Word>{isWordmaster || game.isGuessed ? game.word : (game.word as string).split('').map(ch => ch === ' ' ? ch : '_')}</Word></p>}
     </InformationContainer>
   )
 }

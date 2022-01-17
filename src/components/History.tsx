@@ -10,7 +10,7 @@ export const History: React.FC<HistoryProps> = ({ questions }) => {
     {questions.map(({ question, answer, player, type }, i) => {
       if(type === 'guess'){
         return (
-          <HistoryLine key={i} correct={answer}>{player} guessed "{question}"</HistoryLine>
+          <HistoryLine key={i} correct={answer} guess>{player} guessed "{question}"</HistoryLine>
         )
       }
 
